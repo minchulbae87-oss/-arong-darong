@@ -26,7 +26,7 @@
             position: relative;
         }
 
-        /* 1. 배경 풍선이 아래에서 위로 올라가는 애니메이션 */
+        /* 1. 동적 배경 풍선 컨테이너 */
         .balloon-container {
             position: absolute;
             top: 0;
@@ -41,11 +41,9 @@
         .bg-balloon {
             position: absolute;
             bottom: -150px;
-            width: 50px;
-            height: 65px;
             border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
-            opacity: 0.65;
-            animation: floatUp linear infinite;
+            opacity: 0.7;
+            animation: floatUp linear forwards;
         }
 
         .bg-balloon::after {
@@ -56,60 +54,28 @@
             transform: translateX(-50%);
             width: 0;
             height: 0;
-            border-left: 3px solid transparent;
-            border-right: 3px solid transparent;
-            border-bottom: 7px solid inherit;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-bottom: 8px solid inherit;
         }
 
         /* 풍선 실 */
         .bg-balloon::before {
             content: '';
             position: absolute;
-            bottom: -25px;
+            bottom: -28px;
             left: 50%;
-            width: 1px;
-            height: 18px;
+            width: 1.5px;
+            height: 20px;
             background: rgba(0, 0, 0, 0.15);
         }
-
-        /* 풍선 대량 배치 및 매우 빠른 속도 설정 (28개) */
-        .b1  { left: 2%;  background: #ff7b9c; animation-duration: 1.5s; animation-delay: 0s; }
-        .b2  { left: 6%;  background: #85e3ff; animation-duration: 1.2s; animation-delay: 0.7s; width: 60px; height: 75px; }
-        .b3  { left: 10%; background: #b9b0ff; animation-duration: 1.7s; animation-delay: 0.3s; }
-        .b4  { left: 14%; background: #baffc9; animation-duration: 1.3s; animation-delay: 1.0s; width: 45px; height: 60px; }
-        .b5  { left: 18%; background: #ffb3ba; animation-duration: 1.4s; animation-delay: 0.2s; }
-        .b6  { left: 22%; background: #ffd97d; animation-duration: 1.1s; animation-delay: 0.8s; width: 55px; height: 70px; }
-        .b7  { left: 26%; background: #ff7b9c; animation-duration: 1.6s; animation-delay: 0.5s; }
-        .b8  { left: 30%; background: #85e3ff; animation-duration: 1.25s; animation-delay: 0.1s; width: 50px; height: 65px; }
-        .b9  { left: 34%; background: #b9b0ff; animation-duration: 1.5s; animation-delay: 0.9s; }
-        .b10 { left: 38%; background: #baffc9; animation-duration: 1.15s; animation-delay: 0.4s; width: 65px; height: 80px; }
-        .b11 { left: 42%; background: #ffb3ba; animation-duration: 1.8s; animation-delay: 1.2s; }
-        .b12 { left: 46%; background: #ffd97d; animation-duration: 1.3s; animation-delay: 0.6s; width: 45px; height: 60px; }
-        .b13 { left: 50%; background: #ff7b9c; animation-duration: 1.4s; animation-delay: 0.3s; }
-        .b14 { left: 54%; background: #85e3ff; animation-duration: 1.6s; animation-delay: 0.8s; width: 55px; height: 70px; }
-        .b15 { left: 58%; background: #b9b0ff; animation-duration: 1.2s; animation-delay: 0.2s; }
-        .b16 { left: 62%; background: #baffc9; animation-duration: 1.5s; animation-delay: 1.1s; width: 60px; height: 75px; }
-        .b17 { left: 66%; background: #ffb3ba; animation-duration: 1.35s; animation-delay: 0.5s; }
-        .b18 { left: 70%; background: #ffd97d; animation-duration: 1.1s; animation-delay: 0.7s; width: 50px; height: 65px; }
-        .b19 { left: 74%; background: #ff7b9c; animation-duration: 1.65s; animation-delay: 0.1s; }
-        .b20 { left: 78%; background: #85e3ff; animation-duration: 1.25s; animation-delay: 0.9s; width: 55px; height: 70px; }
-        .b21 { left: 82%; background: #b9b0ff; animation-duration: 1.45s; animation-delay: 0.4s; }
-        .b22 { left: 86%; background: #baffc9; animation-duration: 1.3s; animation-delay: 0.6s; width: 50px; height: 65px; }
-        .b23 { left: 90%; background: #ffb3ba; animation-duration: 1.55s; animation-delay: 0.2s; }
-        .b24 { left: 94%; background: #ffd97d; animation-duration: 1.15s; animation-delay: 1.0s; width: 60px; height: 75px; }
-        .b25 { left: 15%; background: #ff7b9c; animation-duration: 1.4s; animation-delay: 0.5s; }
-        .b26 { left: 45%; background: #85e3ff; animation-duration: 1.2s; animation-delay: 0.3s; width: 55px; height: 70px; }
-        .b27 { left: 75%; background: #b9b0ff; animation-duration: 1.6s; animation-delay: 0.7s; }
-        .b28 { left: 96%; background: #baffc9; animation-duration: 1.3s; animation-delay: 0.1s; width: 45px; height: 60px; }
 
         @keyframes floatUp {
             0% {
                 transform: translateY(0) rotate(0deg);
-                opacity: 0.7;
             }
             100% {
-                transform: translateY(-120vh) rotate(15deg);
-                opacity: 0.15;
+                transform: translateY(-125vh) rotate(25deg);
             }
         }
 
@@ -127,11 +93,11 @@
             padding: 20px;
         }
 
-        /* 메인 풍선 버튼 */
+        /* 메인 풍선 버튼 (기본 state) */
         .balloon-btn {
             width: 310px;
             height: 370px;
-            background: linear-gradient(135deg, #e0f2fe 0%, #fce7f3 100%);
+            background: linear-gradient(135deg, #fef2f2 0%, #fce7f3 100%);
             border-radius: 50% 50% 50% 50% / 45% 45% 55% 55%;
             display: flex;
             flex-direction: column;
@@ -139,23 +105,23 @@
             align-items: center;
             box-shadow: 0 20px 40px rgba(160, 130, 180, 0.25), inset -12px -12px 25px rgba(255, 255, 255, 0.8);
             cursor: pointer;
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.4s ease;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.4s ease, box-shadow 0.4s ease;
             position: relative;
             padding: 30px;
             text-align: center;
             border: 4px solid rgba(255, 255, 255, 0.6);
         }
 
-        /* 터졌을 때(결과 공개 시) 하늘색으로 변경되는 스타일 */
+        /* 터졌을 때 (진하고 선명한 하늘색 적용) */
         .balloon-btn.revealed {
-            background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
-            box-shadow: 0 20px 40px rgba(2, 132, 199, 0.3), inset -12px -12px 25px rgba(255, 255, 255, 0.5);
-            border-color: rgba(255, 255, 255, 0.8);
+            background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);
+            box-shadow: 0 20px 45px rgba(0, 131, 176, 0.45), inset -12px -12px 25px rgba(255, 255, 255, 0.4);
+            border-color: rgba(255, 255, 255, 0.9);
         }
 
-        /* 터졌을 때 꼬리 색상도 조화롭게 변경 */
+        /* 터졌을 때 꼬리 색상 변경 */
         .balloon-btn.revealed .balloon-tail {
-            border-bottom-color: #0ea5e9;
+            border-bottom-color: #0083b0;
         }
 
         .balloon-btn:active {
@@ -195,7 +161,7 @@
 
         .emoji {
             font-size: 48px;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
         }
 
         @keyframes popIn {
@@ -219,37 +185,8 @@
 </head>
 <body>
 
-    <!-- 아래에서 위로 올라가는 배경 풍선들 (대량 및 고속) -->
-    <div class="balloon-container">
-        <div class="bg-balloon b1"></div>
-        <div class="bg-balloon b2"></div>
-        <div class="bg-balloon b3"></div>
-        <div class="bg-balloon b4"></div>
-        <div class="bg-balloon b5"></div>
-        <div class="bg-balloon b6"></div>
-        <div class="bg-balloon b7"></div>
-        <div class="bg-balloon b8"></div>
-        <div class="bg-balloon b9"></div>
-        <div class="bg-balloon b10"></div>
-        <div class="bg-balloon b11"></div>
-        <div class="bg-balloon b12"></div>
-        <div class="bg-balloon b13"></div>
-        <div class="bg-balloon b14"></div>
-        <div class="bg-balloon b15"></div>
-        <div class="bg-balloon b16"></div>
-        <div class="bg-balloon b17"></div>
-        <div class="bg-balloon b18"></div>
-        <div class="bg-balloon b19"></div>
-        <div class="bg-balloon b20"></div>
-        <div class="bg-balloon b21"></div>
-        <div class="bg-balloon b22"></div>
-        <div class="bg-balloon b23"></div>
-        <div class="bg-balloon b24"></div>
-        <div class="bg-balloon b25"></div>
-        <div class="bg-balloon b26"></div>
-        <div class="bg-balloon b27"></div>
-        <div class="bg-balloon b28"></div>
-    </div>
+    <!-- 자바스크립트로 풍선이 무한 생성되는 컨테이너 -->
+    <div class="balloon-container" id="balloonContainer"></div>
 
     <div class="card-wrapper">
         <div class="balloon-btn" id="balloonBtn" onclick="toggleReveal(event)">
@@ -275,6 +212,39 @@
     </div>
 
     <script>
+        // 무한 초고속 배경 풍선 생성 스크립트
+        const colors = ['#ff7b9c', '#85e3ff', '#b9b0ff', '#baffc9', '#ffb3ba', '#ffd97d'];
+
+        function createBgBalloon() {
+            const container = document.getElementById('balloonContainer');
+            if (!container) return;
+
+            const balloon = document.createElement('div');
+            balloon.classList.add('bg-balloon');
+
+            // 무작위 위치, 크기, 색상, 매우 빠른 속도(0.8초~1.5초) 부여
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            const randomX = Math.random() * 100; // 가로 위치 (0~100%)
+            const randomSize = Math.floor(Math.random() * 35) + 45; // 크기 45px ~ 80px
+            const randomDuration = Math.random() * 0.7 + 0.8; // 속도 0.8초 ~ 1.5초
+
+            balloon.style.left = randomX + '%';
+            balloon.style.background = randomColor;
+            balloon.style.width = randomSize + 'px';
+            balloon.style.height = (randomSize * 1.25) + 'px';
+            balloon.style.animationDuration = randomDuration + 's';
+
+            container.appendChild(balloon);
+
+            // 애니메이션이 끝나면 메모리에서 DOM 요소 제거
+            setTimeout(() => {
+                balloon.remove();
+            }, randomDuration * 1000);
+        }
+
+        // 0.12초마다 풍선을 지속 생성
+        setInterval(createBgBalloon, 120);
+
         function toggleReveal(e) {
             const btn = document.getElementById('balloonBtn');
             const qText = document.getElementById('questionText');
@@ -283,11 +253,11 @@
             if (rContent.style.display === 'flex') {
                 rContent.style.display = 'none';
                 qText.style.display = 'block';
-                btn.classList.remove('revealed'); // 원래 색상으로 복구
+                btn.classList.remove('revealed'); // 원래 색상 복구
             } else {
                 qText.style.display = 'none';
                 rContent.style.display = 'flex';
-                btn.classList.add('revealed'); // 하늘색으로 변경[span_1](start_span)[span_1](end_span)
+                btn.classList.add('revealed'); // 진한 하늘색으로 변환
 
                 // 풍선을 터뜨렸을 때 폭죽(컨페티) 효과 연출
                 triggerConfetti();
