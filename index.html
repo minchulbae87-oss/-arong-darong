@@ -3,217 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>아롱이와 다롱이의 공개 페이지</title>
+    <title>아롱이와 다롱이의 성별은..?</title>
     <style>
-        :root {
-            --primary-color: #ff7b9c;
-            --secondary-color: #ffaebc;
-            --bg-color: #fff5f7;
-            --card-bg: #ffffff;
-            --text-color: #4a4a4a;
-            --accent-color: #6c5ce7;
-        }
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: #f5f0fb;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 배경 풍선 연출 */
+        .bg-balloons {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            background: radial-gradient(circle at 50% 50%, #ffffff 0%, #f3ebf9 100%);
+        }
+
+        .bg-balloon {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.7;
+        }
+
+        .bg-b1 { width: 90px; height: 110px; background: #85e3ff; top: 10%; left: 5%; border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%; }
+        .bg-b2 { width: 80px; height: 100px; background: #b9b0ff; top: 18%; left: 25%; border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%; }
+        .bg-b3 { width: 100px; height: 120px; background: #ffb3ba; top: 15%; right: 15%; border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%; }
+        .bg-b4 { width: 85px; height: 105px; background: #baffc9; top: 30%; right: 5%; border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%; }
+        .bg-b5 { width: 95px; height: 115px; background: #85e3ff; bottom: 15%; left: 8%; border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%; }
+        .bg-b6 { width: 110px; height: 130px; background: #b9b0ff; bottom: 5%; right: -5%; border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%; }
+        .bg-b7 { width: 75px; height: 95px; background: #ff7b9c; bottom: 12%; right: 40%; border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%; }
+
+        /* 카드 메인 콘텐트 */
+        .card-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 420px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             padding: 20px;
         }
 
-        .container {
-            background: var(--card-bg);
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(255, 123, 156, 0.15);
-            max-width: 480px;
-            width: 100%;
-            padding: 40px 28px;
-            text-align: center;
+        /* 중앙 중앙 풍선 버튼 */
+        .balloon-btn {
+            width: 320px;
+            height: 380px;
+            background: linear-gradient(135deg, #d3eaff 0%, #ffd4e5 100%);
+            border-radius: 50% 50% 50% 50% / 45% 45% 55% 55%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 15px 35px rgba(180, 150, 200, 0.3), inset -10px -10px 20px rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
-            overflow: hidden;
-            border: 2px solid #ffe3e8;
+            padding: 30px;
+            text-align: center;
         }
 
-        .badge {
-            display: inline-block;
-            background: var(--secondary-color);
-            color: #fff;
-            font-weight: 700;
-            font-size: 14px;
-            padding: 6px 16px;
-            border-radius: 20px;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
+        .balloon-btn:active {
+            transform: scale(0.95);
         }
 
-        h1 {
-            color: #ff477e;
+        .balloon-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 18px solid #f8b8d0;
+        }
+
+        .title-text {
             font-size: 26px;
-            margin-bottom: 12px;
+            font-weight: 800;
+            color: #5d4b70;
+            line-height: 1.5;
             word-break: keep-all;
         }
 
-        p.subtitle {
-            font-size: 15px;
-            color: #7f8c8d;
-            margin-bottom: 30px;
-            line-height: 1.5;
-        }
-
-        .reveal-box {
-            background: #fff0f3;
-            border-radius: 18px;
-            padding: 30px 20px;
-            margin-bottom: 30px;
-            border: 2px dashed var(--primary-color);
-            transition: all 0.5s ease;
-        }
-
-        .char-container {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            margin-top: 15px;
-        }
-
-        .character {
-            flex: 1;
-            padding: 10px;
-        }
-
-        .avatar {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            background: #ffe3e8;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 40px;
-            margin: 0 auto 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            border: 3px solid #fff;
-        }
-
-        .char-name {
-            font-size: 18px;
-            font-weight: bold;
-            color: #ff477e;
-            margin-bottom: 4px;
-        }
-
-        .char-desc {
-            font-size: 13px;
-            color: #666;
-        }
-
-        .vs-badge {
-            font-weight: 900;
-            color: var(--primary-color);
-            font-size: 20px;
-            font-style: italic;
-        }
-
-        .btn {
-            background: linear-gradient(135deg, #ff7b9c 0%, #ff477e 100%);
-            color: white;
-            border: none;
-            padding: 16px 32px;
-            font-size: 17px;
-            font-weight: bold;
-            border-radius: 30px;
-            cursor: pointer;
-            width: 100%;
-            box-shadow: 0 6px 20px rgba(255, 71, 126, 0.3);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 71, 126, 0.4);
-        }
-
-        .btn:active {
-            transform: translateY(1px);
-        }
-
-        .secret-message {
+        /* 공개 화면 (결과 연출) */
+        .reveal-content {
             display: none;
-            margin-top: 25px;
-            padding: 20px;
-            background: #f0f3ff;
-            border-radius: 16px;
-            border: 1px solid #d0d7de;
-            animation: fadeIn 0.6s ease-in-out forwards;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
-        .secret-message h3 {
-            color: var(--accent-color);
-            margin-bottom: 8px;
-            font-size: 18px;
+        .emoji {
+            font-size: 50px;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
         }
 
-        .secret-message p {
-            font-size: 14px;
-            color: #555;
-            line-height: 1.6;
+        @keyframes popIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* 하단 안내 가이드 캡슐 */
+        .hint-capsule {
+            margin-top: 40px;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #6a5b7b;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(5px);
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <span class="badge">SPECIAL REVEAL</span>
-        <h1>아롱이 & 다롱이 비밀 공개!</h1>
-        <p class="subtitle">궁금했던 아롱이와 다롱이의 이야기,<br>아래 버튼을 눌러 확인해보세요!</p>
+    <div class="bg-balloons">
+        <div class="bg-balloon bg-b1"></div>
+        <div class="bg-balloon bg-b2"></div>
+        <div class="bg-balloon bg-b3"></div>
+        <div class="bg-balloon bg-b4"></div>
+        <div class="bg-balloon bg-b5"></div>
+        <div class="bg-balloon bg-b6"></div>
+        <div class="bg-balloon bg-b7"></div>
+    </div>
 
-        <div class="reveal-box">
-            <div class="char-container">
-                <div class="character">
-                    <div class="avatar">🐶</div>
-                    <div class="char-name">아롱이</div>
-                    <div class="char-desc">귀여운 호기심 대장</div>
-                </div>
-                <div class="vs-badge">&</div>
-                <div class="character">
-                    <div class="avatar">🐱</div>
-                    <div class="char-name">다롱이</div>
-                    <div class="char-desc">애교 만점 장난꾸러기</div>
-                </div>
+    <div class="card-wrapper">
+        <div class="balloon-btn" id="balloonBtn" onclick="toggleReveal()">
+            <!-- 질문 텍스트 -->
+            <div class="title-text" id="questionText">
+                아롱이와 다롱이의<br>성별은..?
+            </div>
+
+            <!-- 성별 공개 이모지 (남자아이 2명으로 변경) -->
+            <div class="reveal-content" id="revealContent">
+                <span class="emoji">❤️</span>
+                <span class="emoji">👦🏻</span>
+                <span class="emoji">👦🏻</span>
+                <span class="emoji">❤️</span>
             </div>
         </div>
 
-        <button class="btn" onclick="revealSecret()">비밀 확인하기 ✨</button>
-
-        <div class="secret-message" id="secretMessage">
-            <h3>🎉 아롱이와 다롱이는 절친입니다!</h3>
-            <p>언제나 함께 티격태격하며 즐거운 추억을 만들어가는 아롱이와 다롱이의 특별한 이야기를 기대해주세요!</p>
+        <div class="hint-capsule">
+            풍선을 톡 눌러주세요
         </div>
     </div>
 
     <script>
-        function revealSecret() {
-            const secretMsg = document.getElementById('secretMessage');
-            if (secretMsg.style.display === 'block') {
-                secretMsg.style.display = 'none';
+        function toggleReveal() {
+            const qText = document.getElementById('questionText');
+            const rContent = document.getElementById('revealContent');
+
+            if (rContent.style.display === 'flex') {
+                rContent.style.display = 'none';
+                qText.style.display = 'block';
             } else {
-                secretMsg.style.display = 'block';
-                secretMsg.scrollIntoView({ behavior: 'smooth' });
+                qText.style.display = 'none';
+                rContent.style.display = 'flex';
             }
         }
     </script>
