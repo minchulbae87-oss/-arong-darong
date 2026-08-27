@@ -61,7 +61,6 @@
             border-bottom: 10px solid inherit;
         }
 
-        /* 풍선 실 */
         .bg-balloon::before {
             content: '';
             position: absolute;
@@ -72,7 +71,6 @@
             background: rgba(0, 0, 0, 0.15);
         }
 
-        /* 다양한 색상 및 위치 설정 */
         .b1 { left: 8%; background: #ff7b9c; animation-duration: 9s; animation-delay: 0s; }
         .b2 { left: 22%; background: #85e3ff; animation-duration: 7s; animation-delay: 2s; width: 85px; height: 105px; }
         .b3 { left: 38%; background: #b9b0ff; animation-duration: 10s; animation-delay: 1s; }
@@ -129,7 +127,6 @@
             transform: scale(0.95);
         }
 
-        /* 풍선 꼬리 연출 */
         .balloon-tail {
             position: absolute;
             bottom: -18px;
@@ -148,7 +145,6 @@
             word-break: keep-all;
         }
 
-        /* 공개 화면 (결과 연출) */
         .reveal-content {
             display: none;
             flex-direction: row;
@@ -168,7 +164,6 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
-        /* 하단 안내 캡슐 */
         .hint-capsule {
             margin-top: 40px;
             background: rgba(255, 255, 255, 0.9);
@@ -184,7 +179,6 @@
 </head>
 <body>
 
-    <!-- 아래에서 위로 올라가는 배경 풍선들 -->
     <div class="balloon-container">
         <div class="bg-balloon b1"></div>
         <div class="bg-balloon b2"></div>
@@ -197,12 +191,11 @@
 
     <div class="card-wrapper">
         <div class="balloon-btn" id="balloonBtn" onclick="toggleReveal(event)">
-            <!-- 질문 텍스트 -->
             <div class="title-text" id="questionText">
                 아롱이와 다롱이의<br>성별은..?
             </div>
 
-            <!-- 성별 공개 이모지 (보라색 하트 💜 및 남자아이 2명 👦🏻 👦🏻) -->
+            <!-- 보라색 하트로 적용된 공개 화면 -->
             <div class="reveal-content" id="revealContent">
                 <span class="emoji">💜</span>
                 <span class="emoji">👦🏻</span>
@@ -229,17 +222,13 @@
             } else {
                 qText.style.display = 'none';
                 rContent.style.display = 'flex';
-
-                // 풍선을 터뜨렸을 때 폭죽(컨페티) 효과 연출
                 triggerConfetti();
             }
         }
 
         function triggerConfetti() {
             var count = 200;
-            var defaults = {
-                origin: { y: 0.6 }
-            };
+            var defaults = { origin: { y: 0.6 } };
 
             function fire(particleRatio, opts) {
                 confetti(Object.assign({}, defaults, opts, {
@@ -247,28 +236,11 @@
                 }));
             }
 
-            fire(0.25, {
-                spread: 26,
-                startVelocity: 55,
-            });
-            fire(0.2, {
-                spread: 60,
-            });
-            fire(0.35, {
-                spread: 100,
-                decay: 0.91,
-                scalar: 0.8
-            });
-            fire(0.1, {
-                spread: 120,
-                startVelocity: 25,
-                decay: 0.92,
-                scalar: 1.2
-            });
-            fire(0.1, {
-                spread: 120,
-                startVelocity: 45,
-            });
+            fire(0.25, { spread: 26, startVelocity: 55 });
+            fire(0.2, { spread: 60 });
+            fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+            fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+            fire(0.1, { spread: 120, startVelocity: 45 });
         }
     </script>
 </body>
